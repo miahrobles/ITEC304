@@ -1,0 +1,39 @@
+from flask import Flask, request
+from datetime import datetime
+
+app = Flask(_name_)
+
+@app.route('/')
+def home():
+    return """
+    <html><body>
+    <h2>Hello!</h2>
+    <form action="/input">
+    What's your name? <input type='text' name='username'><br>
+    Your characteristic? <input type='text' name='characteristic'><br>
+    <input type='submit' value='Continue'>
+    </form>
+    </body></html>
+    """
+
+@app.route('/input')
+def input():
+    username = request.args.get('username')
+    characteristic = request.args['characteristic']
+
+    if characteristic  == '':
+        msg = 'kind'
+    else:
+        msg = 'Jeremiah is ' + characteristic
+
+    return """
+    <html><body>
+         <h2>Jeremiah Mendoza</h2>
+        {1}
+    </body></html>
+    """.format(username, msg)
+
+
+
+# Launch the FlaskPy dev server
+app.run(host="localhost" , debug=True)
